@@ -4,7 +4,7 @@ import { STATUS } from "../../utils/constants";
 import UserDataTable from "./userdatatable";
 import { Sheet } from 'react-modal-sheet';
 import UserForm from './userform';
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import userStyle from './user.module.css';
 import { IoIosAdd } from "react-icons/io";
@@ -55,7 +55,9 @@ const UserComponent = () => {
         const deleteuser = await userService.deleteUsers(remove_data._id);
         if (deleteuser.status === STATUS.SUCCESS) {
             const delete_data = deleteuser?.message;
-            toast.success(delete_data);
+            toast(delete_data);
+        } else {
+            toast(deleteuser?.response?.data.message);
         }
         fetchAllUsers();
     }
@@ -84,6 +86,7 @@ const UserComponent = () => {
                     </Sheet.Container>
                     <Sheet.Backdrop />
                 </Sheet>
+                <ToastContainer />
             </div>
         </>
     )

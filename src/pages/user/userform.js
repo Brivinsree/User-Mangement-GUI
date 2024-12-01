@@ -100,6 +100,9 @@ const Userform = ({ setOpen, selectedRowData, isEdit, handleAllUser }) => {
                     toast(postuser?.message);
                     handleAllUser();
                     navigate("/user");
+                } else {
+                    setOpen(true);
+                    toast(postuser?.response?.data.message);
                 }
             } else {
                 const postuser = await userService.updateUsers(userpayload, selectedRowData._id);
@@ -108,6 +111,9 @@ const Userform = ({ setOpen, selectedRowData, isEdit, handleAllUser }) => {
                     toast(postuser?.message);
                     handleAllUser();
                     navigate("/user");
+                } else {
+                    setOpen(false);
+                    toast(postuser?.response?.data.message);
                 }
             }
         } else {
